@@ -1,7 +1,9 @@
 class Rover
 
-	def initialize
-		@heading = 'N'
+	DEFAULT_HEADING = 'N' #I chose to use a constant rather than hard code 'N' at initialize because it feels more descriptive
+
+	def initialize(heading: DEFAULT_HEADING )
+		@heading = heading
 	end
 
 	def position

@@ -14,6 +14,11 @@ context 'when instantiated' do
 		expect(rover.heading).to eq 'N' 
 	end
 
+	it 'can have an orientation other than the default' do 
+		s_rover = Rover.new(heading: 'S')
+		expect(s_rover.heading).to eq 'S'
+	end
+
 end
 
 context 'upon receiving input' do
