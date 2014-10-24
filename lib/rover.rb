@@ -13,22 +13,30 @@ class Rover
 		@heading
 	end
 
+	def convert(input)
+		'E'
+	end
+
 	def change_heading_to(new_NSEW_heading) #change heading by passing N,S,E or W as a string
 		@heading = new_NSEW_heading
 	end
 
 	def move
-		if 		self.heading == 'N'
+		if 		heading == 'N'
 					@position[1] += 1
-		elsif 	self.heading == 'S'
+		elsif 	heading == 'S'
 					@position[1] -= 1
-		elsif 	self.heading == 'E'
-					@position[0] +=1
-		elsif 	self.heading == 'W'
+		elsif 	heading == 'E'
+					@position[0] += 1
+		elsif 	heading == 'W'
 					@position[0] -= 1
 		else
 			return "Invalid heading"
 		end
+	end
+
+	def report
+		"#{position.join(" ")} #{heading}" #reports position coordinates and heading for 'output'
 	end
 
 end

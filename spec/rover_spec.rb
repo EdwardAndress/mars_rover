@@ -24,6 +24,11 @@ end
 
 context 'upon receiving input' do
 
+	it 'can convert input commands into instructions for new headings' do
+		input = 'R'
+		expect(rover.convert(input)).to eq 'E'
+	end
+
 	it 'can change heading' do
 		rover.change_heading_to('S')
 		expect(rover.heading).to eq 'S'
@@ -43,6 +48,15 @@ context 'upon receiving input' do
 		e_rover.move
 		expect(e_rover.position).to eq [1, 0]
 
+	end
+
+end
+
+context 'after moving to a new location' do
+
+	it 'reports its new location' do
+		rover.move
+		expect(rover.report).to eq "0 1 N"
 	end
 
 end
