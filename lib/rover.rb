@@ -1,11 +1,8 @@
 class Rover
 
-	DEFAULT_HEADING = 'N' #I chose to use a constant rather than hard code 'N' at initialize because it feels more descriptive
-	DEFAULT_STARTING_POSITION = [0, 0]
-
-	def initialize(heading: DEFAULT_HEADING, starting_position: DEFAULT_STARTING_POSITION )
-		@heading = heading
-		@position = starting_position
+	def initialize(heading: heading, starting_position: starting_position)
+		@heading = heading || 'N'					#I would like to assign the defaults to named constants but this causes rovers to 
+		@position = starting_position || [0, 0]		#be instantiated with the wrong start position in some cases and I don't know why
 	end
 
 	def position
