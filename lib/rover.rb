@@ -13,8 +13,12 @@ class Rover
 		@heading
 	end
 
+	def index_of_heading
+		headings = ["N", "E", "S", "W"]
+		headings.index(heading)
+	end
+
 	def convert(input)
-		'E'
 	end
 
 	def change_heading_to(new_NSEW_heading) #change heading by passing N,S,E or W as a string
