@@ -64,6 +64,12 @@ context 'upon receiving input' do
 
 	end
 
+	it 'can accept a list of instructions and move automatically do a final destination' do
+		input = 'MRM'
+		rover.accept_input(input)
+		expect(rover.report).to eq "1 1 E"
+	end
+
 end
 
 context 'after moving to a new location' do

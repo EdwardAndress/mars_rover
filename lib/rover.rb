@@ -36,6 +36,16 @@ class Rover
 		return index_to_heading(index)
 	end
 
+	def accept_input(input)
+		input.chars.each do |instruction|
+			if instruction == "M"
+				self.move
+			else
+				change_heading_to(convert(instruction))
+			end
+		end
+	end
+
 	def change_heading_to(new_NSEW_heading) #change heading by passing N,S,E or W as a string
 		@heading = new_NSEW_heading
 	end
