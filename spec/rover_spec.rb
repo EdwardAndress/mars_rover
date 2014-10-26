@@ -20,6 +20,16 @@ context 'when instantiated' do
 		expect(e_rover.heading).to eq 'E'
 	end
 
+	it 'can convert its heading into a numerical value for use in interpreting turn commands' do
+		expect(rover.heading_to_index).to eq 0
+		rover.change_heading_to('E')
+		expect(rover.heading_to_index).to eq 1
+	end
+
+	it 'can convert the heading index back into a heading' do
+		expect(rover.index_to_heading(0)).to eq 'N'
+	end
+
 end
 
 context 'upon receiving input' do
@@ -28,6 +38,9 @@ context 'upon receiving input' do
 		input = 'R'
 		expect(rover.convert(input)).to eq 'E'
 		expect(e_rover.convert(input)).to eq 'S'
+
+		input = 'L'
+		expect(rover.convert(input)).to eq 'W'
 	end
 
 	it 'can change heading' do
