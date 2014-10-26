@@ -26,9 +26,9 @@ class Rover
 		end
 	end
 
-	def convert(input)
+	def convert(instruction)
 		index = self.heading_to_index
-		if input == 'R'
+		if instruction == 'R'
 			index += 1
 		else
 			index -= 1
@@ -39,11 +39,21 @@ class Rover
 	def accept_input(input)
 		input.chars.each do |instruction|
 			if instruction == "M"
-				self.move
+				move
 			else
 				change_heading_to(convert(instruction))
 			end
 		end
+		report
+	end
+
+	def recon_area_data(area_size)
+		arr = area_size.split(" ")
+		@plateau = arr.map {|e| e.to_i}
+	end
+
+	def plateau_size
+		@plateau
 	end
 
 	def change_heading_to(new_NSEW_heading) #change heading by passing N,S,E or W as a string

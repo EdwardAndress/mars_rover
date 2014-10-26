@@ -20,6 +20,11 @@ context 'when instantiated' do
 		expect(e_rover.heading).to eq 'E'
 	end
 
+	it 'must know the size of the recon area' do
+		rover.recon_area_data("5 5")
+		expect(rover.plateau_size).to eq [5, 5]
+	end
+
 	it 'can convert its heading into a numerical value for use in interpreting turn commands' do
 		expect(rover.heading_to_index).to eq 0
 		rover.change_heading_to('E')
@@ -68,6 +73,9 @@ context 'upon receiving input' do
 		input = 'MRM'
 		rover.accept_input(input)
 		expect(rover.report).to eq "1 1 E"
+	end
+
+	it 'must not move off the edge of the plateau' do
 	end
 
 end
