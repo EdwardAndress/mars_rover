@@ -12,17 +12,12 @@ context 'when instantiated' do
 		expect(rover.position).to eq [0, 0]
 	end
 
-	it 'has a default orientation' do
+	it 'has a default heading' do
 		expect(rover.heading).to eq 'N' 
 	end
 
-	it 'can have its orientation customised' do 
+	it 'can have its heading customised' do 
 		expect(e_rover.heading).to eq 'E'
-	end
-
-	it 'must know the size of the recon area' do
-		rover.accept_plateau_data("5 5")
-		expect(rover.plateau_size).to eq [5, 5]
 	end
 
 	it 'can convert its heading into a numerical value for use in interpreting turn commands' do
@@ -38,6 +33,11 @@ context 'when instantiated' do
 end
 
 context 'upon receiving input' do
+
+	it 'can be given information regarding the plateau size and shape' do
+		rover.accept_plateau_data("5 5")
+		expect(rover.plateau_size).to eq [5, 5]
+	end
 
 	it 'can convert input commands into instructions for new headings' do
 		input = 'R'
