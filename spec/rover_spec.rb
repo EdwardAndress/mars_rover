@@ -21,9 +21,9 @@ context 'when instantiated' do
 	end
 
 	it 'can convert its heading into a numerical value for use in interpreting turn commands' do #need to refactor associated methods and may therefore break some tests
-		expect(rover.heading_to_index).to eq 0
+		expect(rover.current_heading_numerical).to eq 0
 		rover.change_heading_to('E')
-		expect(rover.heading_to_index).to eq 1
+		expect(rover.current_heading_numerical).to eq 1
 	end
 
 	it 'can convert the heading index back into a heading' do #need to refactor associated methods and may therefore break some tests

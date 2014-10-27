@@ -14,7 +14,7 @@ class Rover #used to explore a rectangular plateau and can be fed a list of comm
 		@heading
 	end
 
-	def heading_to_index #converts heading to a numerical value for manipulation by turn instructions
+	def current_heading_numerical #converts heading to a numerical value for manipulation by turn instructions
 		["N", "E", "S", "W", "N"].index(heading)
 	end
 
@@ -31,7 +31,7 @@ class Rover #used to explore a rectangular plateau and can be fed a list of comm
 	end
 
 	def convert(instruction) #converts 'L' or 'R' turn instructions into a new heading
-		instruction == 'R' ? index_to_heading((heading_to_index) + turn_right) : index_to_heading((heading_to_index) + turn_left)
+		instruction == 'R' ? index_to_heading((current_heading_numerical) + turn_right) : index_to_heading((current_heading_numerical) + turn_left)
 	end
 
 	def format_input(input)
