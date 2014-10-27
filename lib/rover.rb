@@ -22,8 +22,16 @@ class Rover #used to explore a rectangular plateau and can be fed a list of comm
 		index == -1 ? 'W' : ["N", "E", "S", "W", "N"][index]
 	end
 
+	def turn_right
+		1
+	end
+
+	def turn_left
+		-1
+	end
+
 	def convert(instruction) #converts 'L' or 'R' turn instructions into a new heading
-		instruction == 'R' ? index_to_heading((heading_to_index) + 1) : index_to_heading((heading_to_index) - 1)
+		instruction == 'R' ? index_to_heading((heading_to_index) + turn_right) : index_to_heading((heading_to_index) + turn_left)
 	end
 
 	def accept_input(input) #takes input as list of instructions in a string then splits string to array and iterates through instructions
