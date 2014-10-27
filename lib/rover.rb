@@ -14,24 +14,16 @@ class Rover #used to explore a rectangular plateau and can be fed a list of comm
 		@heading
 	end
 
-	def heading_to_index #converts heading to a numerical value
+	def heading_to_index #converts heading to a numerical value for manipulation by turn instructions
 		["N", "E", "S", "W", "N"].index(heading)
 	end
 
 	def index_to_heading(index) #converts numerical value into heading
-
 		index == -1 ? 'W' : ["N", "E", "S", "W", "N"][index]
-
 	end
 
 	def convert(instruction) #converts 'L' or 'R' turn instructions into a new heading
-		index = self.heading_to_index
-		if instruction == 'R' #R = Right turn - therefore index increases by 1 (see array in index_to_heading method)
-			index += 1
-		elsif instruction == 'L' #L = Left turn - therefore index decreases by 1 (see array in index_to_heading method)
-			index -= 1
-		end
-		return index_to_heading(index) #returns a new heading
+		instruction == 'R' ? index_to_heading((heading_to_index) + 1) : index_to_heading((heading_to_index) - 1)
 	end
 
 	def accept_input(input) #takes input as list of instructions in a string then splits string to array and iterates through instructions
