@@ -14,31 +14,31 @@ class Rover #used to explore a rectangular plateau and can be fed a list of comm
 		@heading
 	end
 
-	def current_heading_numerical #converts heading to a numerical value for manipulation by turn instructions
+	def current_heading_numerical #converts N/S/E/W heading to a numerical value for manipulation by turn instructions
 		["N", "E", "S", "W", "N"].index(heading)
 	end
 
-	def heading_alphabetical(heading_numerical) #converts numerical value into heading
+	def heading_alphabetical(heading_numerical) #converts numerical value into N/S/E/W heading
 		heading_numerical == -1 ? 'W' : ["N", "E", "S", "W", "N"][heading_numerical]
 	end
 
-	def turn_right
-		1
+	def turn_right #used to add 1 to numberical heading
+		heading_alphabetical((current_heading_numerical) + 1)
 	end
 
-	def turn_left
-		-1
+	def turn_left #used to subtract 1 from numerical heading
+		heading_alphabetical((current_heading_numerical) -1)
 	end
 
 	def new_heading_from(instruction) #converts 'L' or 'R' turn instructions into a new heading
-		instruction == 'R' ? heading_alphabetical((current_heading_numerical) + turn_right) : heading_alphabetical((current_heading_numerical) + turn_left)
+		instruction == 'R' ? turn_right : turn_left
 	end
 
-	def format_input(input)
+	def format_input(input) #converts input string into an array
 		@instructions = input.chars
 	end
 
-	def run_instructions #takes input as list of instructions in a string then splits string to array and iterates through instructions
+	def run_instructions #takes instructions array and iterates through, dealing with each one appropriately
 		@instructions.each do |instruction|
 			instruction == "M" ? self.move : change_heading_to(new_heading_from(instruction))
 		end
