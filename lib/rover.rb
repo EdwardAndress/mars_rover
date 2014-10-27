@@ -1,8 +1,9 @@
 class Rover #used to explore a rectangular plateau and can be fed a list of commands in a string
 
-	def initialize(heading: heading, starting_position: starting_position)
+	def initialize(heading: heading, starting_position: starting_position, plateau_size: plateau_size)
 		@heading = heading || 'N'					#I would like to assign the defaults to named constants but this causes rovers to 
 		@position = starting_position || [0, 0]		#be instantiated with the wrong start position in some cases and I don't know why
+		@plateau_size = plateau_size || [5, 5]		#default plateau size set to [5, 5]
 	end
 
 	def position #output current position on the plateau
@@ -48,15 +49,27 @@ class Rover #used to explore a rectangular plateau and can be fed a list of comm
 	end
 
 	def accept_plateau_data(size) #takes plateau size as two numbers separated by a space in a string eg . "5 5"
-		@plateau = size.split(" ").map {|e| e.to_i}
+		@plateau_size = size.split(" ").map {|e| e.to_i}
 	end
 
 	def plateau_size #output plateau size
-		@plateau
+		@plateau_size
 	end
 
-	def safe_move? #checks whether rover will fall off the plateau by following the instructions
-		(position[0] || position[1]) >= 5 ? false : true
+	def safe_move_north? #checks whether rover will fall off the plateau by moving North
+		@position[1] < @plateau_size[1]
+	end
+
+	def safe_move_south? #checks whether rover will fall off the plateau by moving North
+		@position[1] > 0
+	end
+
+	def safe_move_east? #checks whether rover will fall off the plateau by moving North
+		@position[0] < @plateau_size[0]
+	end
+
+	def safe_move_west? #checks whether rover will fall off the plateau by moving North
+		@position[0] > 0
 	end
 
 	def change_heading_to(new_NSEW_heading) #change heading by passing N,S,E or W as a string
@@ -64,13 +77,13 @@ class Rover #used to explore a rectangular plateau and can be fed a list of comm
 	end
 
 	def move
-		if 		heading == 'N' && safe_move?
+		if 		heading == 'N' && safe_move_north?
 					@position[1] += 1
-		elsif 	heading == 'S' && safe_move?
+		elsif 	heading == 'S' && safe_move_south?
 					@position[1] -= 1
-		elsif 	heading == 'E' && safe_move?
+		elsif 	heading == 'E' && safe_move_east?
 					@position[0] += 1
-		elsif 	heading == 'W' && safe_move?
+		elsif 	heading == 'W' && safe_move_west?
 					@position[0] -= 1
 		else
 			return "Invalid heading"
