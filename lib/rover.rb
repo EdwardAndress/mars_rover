@@ -30,7 +30,7 @@ class Rover #used to explore a rectangular plateau and can be fed a list of comm
 		-1
 	end
 
-	def convert(instruction) #converts 'L' or 'R' turn instructions into a new heading
+	def new_heading_from(instruction) #converts 'L' or 'R' turn instructions into a new heading
 		instruction == 'R' ? index_to_heading((current_heading_numerical) + turn_right) : index_to_heading((current_heading_numerical) + turn_left)
 	end
 
@@ -40,7 +40,7 @@ class Rover #used to explore a rectangular plateau and can be fed a list of comm
 
 	def run_instructions #takes input as list of instructions in a string then splits string to array and iterates through instructions
 		@instructions.each do |instruction|
-			instruction == "M" ? self.move : change_heading_to(convert(instruction))
+			instruction == "M" ? self.move : change_heading_to(new_heading_from(instruction))
 		end
 		report
 	end

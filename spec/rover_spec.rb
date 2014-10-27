@@ -41,11 +41,11 @@ context 'upon receiving input' do
 
 	it 'can convert input commands into instructions for new headings' do
 		input = 'R'
-		expect(rover.convert(input)).to eq 'E'
-		expect(e_rover.convert(input)).to eq 'S'
+		expect(rover.new_heading_from(input)).to eq 'E'
+		expect(e_rover.new_heading_from(input)).to eq 'S'
 
 		input = 'L'
-		expect(rover.convert(input)).to eq 'W'
+		expect(rover.new_heading_from(input)).to eq 'W'
 	end
 
 	it 'can change heading' do
