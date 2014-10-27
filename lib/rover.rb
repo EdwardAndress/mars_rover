@@ -36,20 +36,19 @@ class Rover
 		return index_to_heading(index)
 	end
 
-	def accept_input(input)
+	def accept_input(input) #takes input as list of instructions in a string then splits string to array and iterates through instructions
 		input.chars.each do |instruction|
-			if instruction == "M"
+			if instruction == "M" #moves rover if command == M
 				move
 			else
-				change_heading_to(convert(instruction))
+				change_heading_to(convert(instruction)) #converts turn instruction to new heading then sets new heading
 			end
 		end
 		report
 	end
 
-	def recon_area_data(area_size)
-		arr = area_size.split(" ")
-		@plateau = arr.map {|e| e.to_i}
+	def accept_plateau_data(size) #takes plateau size as two numbers separated by a space in a string eg . "5 5"
+		@plateau = size.split(" ").map {|e| e.to_i}
 	end
 
 	def plateau_size
@@ -57,7 +56,7 @@ class Rover
 	end
 
 	def safe_move?
-		(rover.position[0] || rover.position[1]) >= 5 ? false : true
+		(position[0] || position[1]) >= 5 ? false : true
 	end
 
 	def change_heading_to(new_NSEW_heading) #change heading by passing N,S,E or W as a string
@@ -65,13 +64,13 @@ class Rover
 	end
 
 	def move
-		if 		heading == 'N'
+		if 		heading == 'N' && safe_move?
 					@position[1] += 1
-		elsif 	heading == 'S'
+		elsif 	heading == 'S' && safe_move?
 					@position[1] -= 1
-		elsif 	heading == 'E'
+		elsif 	heading == 'E' && safe_move?
 					@position[0] += 1
-		elsif 	heading == 'W'
+		elsif 	heading == 'W' && safe_move?
 					@position[0] -= 1
 		else
 			return "Invalid heading"

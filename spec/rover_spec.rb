@@ -21,7 +21,7 @@ context 'when instantiated' do
 	end
 
 	it 'must know the size of the recon area' do
-		rover.recon_area_data("5 5")
+		rover.accept_plateau_data("5 5")
 		expect(rover.plateau_size).to eq [5, 5]
 	end
 
@@ -77,7 +77,7 @@ context 'upon receiving input' do
 
 	it 'must not move off the edge of the plateau' do
 		edge_rover = Rover.new(starting_position: [5, 5])
-		edge_rover.recon_area_data("5 5")
+		edge_rover.accept_plateau_data("5 5")
 		edge_rover.move
 		expect(edge_rover.position).to eq [5, 5]
 	end
