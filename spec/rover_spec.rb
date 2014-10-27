@@ -76,6 +76,10 @@ context 'upon receiving input' do
 	end
 
 	it 'must not move off the edge of the plateau' do
+		edge_rover = Rover.new(starting_position: [5, 5])
+		edge_rover.recon_area_data("5 5")
+		edge_rover.move
+		expect(edge_rover.position).to eq [5, 5]
 	end
 
 end

@@ -56,6 +56,10 @@ class Rover
 		@plateau
 	end
 
+	def safe_move?
+		(rover.position[0] || rover.position[1]) >= 5 ? false : true
+	end
+
 	def change_heading_to(new_NSEW_heading) #change heading by passing N,S,E or W as a string
 		@heading = new_NSEW_heading
 	end
