@@ -1,39 +1,39 @@
-class Rover
+class Rover #used to explore a rectangular plateau and can be fed a list of commands in a string
 
 	def initialize(heading: heading, starting_position: starting_position)
 		@heading = heading || 'N'					#I would like to assign the defaults to named constants but this causes rovers to 
 		@position = starting_position || [0, 0]		#be instantiated with the wrong start position in some cases and I don't know why
 	end
 
-	def position
+	def position #output current position on the plateau
 		@position
 	end
 
-	def heading
+	def heading #output current heading/orientation: N = North, S = South, E = East, W = West
 		@heading
 	end
 
-	def heading_to_index
+	def heading_to_index #converts heading to a numerical value
 		headings = ["N", "E", "S", "W", "N"]
 		headings.index(heading)
 	end
 
-	def index_to_heading(index)
+	def index_to_heading(index) #converts numerical value into heading
 		if index == -1
-			return 'W'
+			return 'W' #because there is no -1 position in the array used
 		else
 			["N", "E", "S", "W", "N"][index]
 		end
 	end
 
-	def convert(instruction)
+	def convert(instruction) #converts 'L' or 'R' turn instructions into a new heading
 		index = self.heading_to_index
-		if instruction == 'R'
+		if instruction == 'R' #R = Right turn - therefore index increases by 1 (see array in index_to_heading method)
 			index += 1
-		else
+		elsif instruction == 'L' #L = Left turn - therefore index decreases by 1 (see array in index_to_heading method)
 			index -= 1
 		end
-		return index_to_heading(index)
+		return index_to_heading(index) #returns a new heading
 	end
 
 	def accept_input(input) #takes input as list of instructions in a string then splits string to array and iterates through instructions
@@ -51,11 +51,11 @@ class Rover
 		@plateau = size.split(" ").map {|e| e.to_i}
 	end
 
-	def plateau_size
+	def plateau_size #output plateau size
 		@plateau
 	end
 
-	def safe_move?
+	def safe_move? #checks whether rover will fall off the plateau by following the instructions
 		(position[0] || position[1]) >= 5 ? false : true
 	end
 
