@@ -15,16 +15,13 @@ class Rover #used to explore a rectangular plateau and can be fed a list of comm
 	end
 
 	def heading_to_index #converts heading to a numerical value
-		headings = ["N", "E", "S", "W", "N"]
-		headings.index(heading)
+		["N", "E", "S", "W", "N"].index(heading)
 	end
 
 	def index_to_heading(index) #converts numerical value into heading
-		if index == -1
-			return 'W' #because there is no -1 position in the array used
-		else
-			["N", "E", "S", "W", "N"][index]
-		end
+
+		index == -1 ? 'W' : ["N", "E", "S", "W", "N"][index]
+
 	end
 
 	def convert(instruction) #converts 'L' or 'R' turn instructions into a new heading
