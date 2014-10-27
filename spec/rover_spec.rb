@@ -71,7 +71,8 @@ context 'upon receiving input' do
 
 	it 'can accept a list of instructions and move automatically do a final destination' do
 		input = 'MRM'
-		rover.accept_input(input)
+		rover.format_input(input)
+		rover.run_instructions
 		expect(rover.report).to eq "1 1 E"
 	end
 

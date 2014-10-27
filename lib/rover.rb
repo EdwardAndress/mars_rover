@@ -34,8 +34,12 @@ class Rover #used to explore a rectangular plateau and can be fed a list of comm
 		instruction == 'R' ? index_to_heading((heading_to_index) + turn_right) : index_to_heading((heading_to_index) + turn_left)
 	end
 
-	def accept_input(input) #takes input as list of instructions in a string then splits string to array and iterates through instructions
-		input.chars.each do |instruction|
+	def format_input(input)
+		@instructions = input.chars
+	end
+
+	def run_instructions #takes input as list of instructions in a string then splits string to array and iterates through instructions
+		@instructions.each do |instruction|
 			if instruction == "M" #moves rover if command == M
 				move
 			else
