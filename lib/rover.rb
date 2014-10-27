@@ -40,11 +40,7 @@ class Rover #used to explore a rectangular plateau and can be fed a list of comm
 
 	def run_instructions #takes input as list of instructions in a string then splits string to array and iterates through instructions
 		@instructions.each do |instruction|
-			if instruction == "M" #moves rover if command == M
-				move
-			else
-				change_heading_to(convert(instruction)) #converts turn instruction to new heading then sets new heading
-			end
+			instruction == "M" ? self.move : change_heading_to(convert(instruction))
 		end
 		report
 	end
