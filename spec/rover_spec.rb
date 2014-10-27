@@ -27,7 +27,7 @@ context 'when instantiated' do
 	end
 
 	it 'can convert the heading index back into a heading' do #need to refactor associated methods and may therefore break some tests
-		expect(rover.index_to_heading(0)).to eq 'N'
+		expect(rover.heading_alphabetical(0)).to eq 'N'
 	end
 
 end
