@@ -6,7 +6,11 @@ class Rover #used to explore a rectangular plateau and can be fed a list of comm
 		@plateau_size = plateau_size || [5, 5]		#default plateau size set to [5, 5]
 	end
 
-	attr_reader :position, :heading
+	attr_reader :position, :heading, :instructions, :plateau_size
+
+	def format_input(input) #converts input string into an array
+		@instructions = input.chars
+	end
 
 	def current_heading_numerical #converts N/S/E/W heading to a numerical value for manipulation by turn instructions
 		["N", "E", "S", "W", "N"].index(heading)
@@ -29,11 +33,6 @@ class Rover #used to explore a rectangular plateau and can be fed a list of comm
 	end
 
 
-	def format_input(input) #converts input string into an array
-		@instructions = input.chars
-	end
-	
-
 	def change_heading_to(new_heading) #change heading by passing N,S,E or W as a string
 		@heading = new_heading
 	end
@@ -47,10 +46,6 @@ class Rover #used to explore a rectangular plateau and can be fed a list of comm
 
 	def accept_plateau_data(size) #takes plateau size as two numbers separated by a space in a string eg . "5 5"
 		@plateau_size = size.split(" ").map {| dimension | dimension.to_i}
-	end
-
-	def plateau_size #output plateau size
-		@plateau_size
 	end
 
 	def safe_move_north? #checks whether rover will fall off the plateau by moving North
