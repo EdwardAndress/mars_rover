@@ -28,9 +28,11 @@ class Rover #used to explore a rectangular plateau and can be fed a list of comm
 		instruction == 'R' ? turn_right : turn_left
 	end
 
+
 	def format_input(input) #converts input string into an array
 		@instructions = input.chars
 	end
+	
 
 	def change_heading_to(new_heading) #change heading by passing N,S,E or W as a string
 		@heading = new_heading
