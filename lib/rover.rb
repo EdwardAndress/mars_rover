@@ -4,9 +4,10 @@ class Rover #used to explore a rectangular plateau and can be fed a list of comm
 		@heading = heading || 'N'					#I would like to assign the defaults to named constants but this causes rovers to 
 		@position = starting_position || [0, 0]		#be instantiated with the wrong start position in some cases and I don't know why
 		@plateau_size = plateau_size || [5, 5]		#default plateau size set to [5, 5]
+		@errors = [] #array to store the rover error log
 	end
 
-	attr_reader :position, :heading, :instructions, :plateau_size
+	attr_reader :position, :heading, :instructions, :plateau_size, :errors
 
 	def format_input(input) #converts input string into an array
 		@instructions = input.chars
@@ -90,7 +91,7 @@ class Rover #used to explore a rectangular plateau and can be fed a list of comm
 		elsif 	heading == 'W' && safe_move_west?
 					move_west
 		else
-			return "Invalid heading"
+			@errors << {Time.now => "Invalid move (aborted) at #{@position} heading #{heading}"}
 		end
 	end
 
