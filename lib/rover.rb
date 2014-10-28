@@ -6,19 +6,13 @@ class Rover #used to explore a rectangular plateau and can be fed a list of comm
 		@plateau_size = plateau_size || [5, 5]		#default plateau size set to [5, 5]
 	end
 
-	def position #output current position on the plateau
-		@position
-	end
-
-	def heading #output current heading/orientation: N = North, S = South, E = East, W = West
-		@heading
-	end
+	attr_reader :position, :heading
 
 	def current_heading_numerical #converts N/S/E/W heading to a numerical value for manipulation by turn instructions
 		["N", "E", "S", "W", "N"].index(heading)
 	end
 
-	def heading_alphabetical(heading_numerical) #converts numerical value into N/S/E/W heading
+	def heading_alphabetical(heading_numerical) #converts a numerical value into N/S/E/W heading - does not use current heading, it uses 
 		heading_numerical == -1 ? 'W' : ["N", "E", "S", "W", "N"][heading_numerical]
 	end
 
@@ -36,6 +30,10 @@ class Rover #used to explore a rectangular plateau and can be fed a list of comm
 
 	def format_input(input) #converts input string into an array
 		@instructions = input.chars
+	end
+
+	def change_heading_to(new_heading) #change heading by passing N,S,E or W as a string
+		@heading = new_heading
 	end
 
 	def run_instructions #takes instructions array and iterates through, dealing with each one appropriately
@@ -67,10 +65,6 @@ class Rover #used to explore a rectangular plateau and can be fed a list of comm
 
 	def safe_move_west? #checks whether rover will fall off the plateau by moving West
 		@position[0] > 0
-	end
-
-	def change_heading_to(new_heading) #change heading by passing N,S,E or W as a string
-		@heading = new_heading
 	end
 
 	def move_north
