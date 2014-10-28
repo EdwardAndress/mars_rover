@@ -27,7 +27,7 @@ class Rover #used to explore a rectangular plateau and can be fed a list of comm
 	end
 
 	def turn_left #used to subtract 1 from numerical heading
-		heading_alphabetical((current_heading_numerical) -1)
+		heading_alphabetical((current_heading_numerical) - 1)
 	end
 
 	def new_heading_from(instruction) #converts 'L' or 'R' turn instructions into a new heading
@@ -46,7 +46,7 @@ class Rover #used to explore a rectangular plateau and can be fed a list of comm
 	end
 
 	def accept_plateau_data(size) #takes plateau size as two numbers separated by a space in a string eg . "5 5"
-		@plateau_size = size.split(" ").map {|e| e.to_i}
+		@plateau_size = size.split(" ").map {| dimension | dimension.to_i}
 	end
 
 	def plateau_size #output plateau size
@@ -57,31 +57,47 @@ class Rover #used to explore a rectangular plateau and can be fed a list of comm
 		@position[1] < @plateau_size[1]
 	end
 
-	def safe_move_south? #checks whether rover will fall off the plateau by moving North
+	def safe_move_south? #checks whether rover will fall off the plateau by moving South
 		@position[1] > 0
 	end
 
-	def safe_move_east? #checks whether rover will fall off the plateau by moving North
+	def safe_move_east? #checks whether rover will fall off the plateau by moving East
 		@position[0] < @plateau_size[0]
 	end
 
-	def safe_move_west? #checks whether rover will fall off the plateau by moving North
+	def safe_move_west? #checks whether rover will fall off the plateau by moving West
 		@position[0] > 0
 	end
 
-	def change_heading_to(new_NSEW_heading) #change heading by passing N,S,E or W as a string
-		@heading = new_NSEW_heading
+	def change_heading_to(new_heading) #change heading by passing N,S,E or W as a string
+		@heading = new_heading
+	end
+
+	def move_north
+		@position[1] += 1
+	end
+
+	def move_south
+		@position[1] -= 1
+	end
+
+	def move_east
+		@position[0] += 1
+	end
+
+	def move_west
+		@position[0] -= 1
 	end
 
 	def move
 		if 		heading == 'N' && safe_move_north?
-					@position[1] += 1
+					move_north
 		elsif 	heading == 'S' && safe_move_south?
-					@position[1] -= 1
+					move_south
 		elsif 	heading == 'E' && safe_move_east?
-					@position[0] += 1
+					move_east					
 		elsif 	heading == 'W' && safe_move_west?
-					@position[0] -= 1
+					move_west
 		else
 			return "Invalid heading"
 		end
