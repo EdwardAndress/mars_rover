@@ -46,7 +46,7 @@ class Rover #used to explore a rectangular plateau and can be fed a list of comm
 		@heading = new_heading
 	end
 
-	def accept_plateau_data(size) #takes plateau size as two numbers separated by a space in a string eg . "5 5"
+	def receive_plateau_data(size) #takes plateau size as two numbers separated by a space in a string eg . "5 5"
 		@plateau_size = size.split(" ").map {| dimension | dimension.to_i}
 	end
 
