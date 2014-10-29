@@ -26,8 +26,10 @@ $ require './rover.rb'
  			- 'L' for turn left
  			- 'R' for turn right
 	* INSTANCE.run_instructions iterates through the formatted input array (@instructions)
-	* INSTANCE.report gives a report of the current location and heading
 	* INSTANCE.explore tells the rover to automatically explore the entire plateau
+	* INSTANCE.change_heading_to('compass_direction') changes the heading to either 'N', 'S', 'E' or 'W' depending on argument
+	* INSTANCE.receive_plateau_data('x y') accepts x/y coordinates as a string with one space in the middle
+	* INSTANCE.report gives a report of the current location and heading
 
 
 
