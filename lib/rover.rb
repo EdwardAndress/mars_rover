@@ -34,14 +34,6 @@ class Rover #used to explore a rectangular plateau and can be fed a list of comm
 		end
 	end
 
-	def turn_right #used to add 1 to numberical heading
-		heading_alphabetical((current_heading_numerical) + 1)
-	end
-
-	def turn_left #used to subtract 1 from numerical heading
-		heading_alphabetical((current_heading_numerical) - 1)
-	end
-
 	def change_heading_to(new_heading) #change heading by passing N,S,E or W as a string
 		@heading = new_heading
 	end
@@ -51,21 +43,12 @@ class Rover #used to explore a rectangular plateau and can be fed a list of comm
 		@total_plateau_area = (@plateau_size[1] + 1) * (@plateau_size[0] + 1)
 	end
 
-	def safe_move_north? #checks whether rover will fall off the plateau by moving North
-		@position[1] < @plateau_size[1]
+	def report
+		"#{position.join(" ")} #{heading}" #reports position coordinates and heading for 'output'
 	end
 
-	def safe_move_south? #checks whether rover will fall off the plateau by moving South
-		@position[1] > 0
-	end
 
-	def safe_move_east? #checks whether rover will fall off the plateau by moving East
-		@position[0] < @plateau_size[0]
-	end
-
-	def safe_move_west? #checks whether rover will fall off the plateau by moving West
-		@position[0] > 0
-	end
+	private
 
 	def move
 		if 		heading == 'N' && safe_move_north?
@@ -85,12 +68,29 @@ class Rover #used to explore a rectangular plateau and can be fed a list of comm
 		end
 	end
 
-	def report
-		"#{position.join(" ")} #{heading}" #reports position coordinates and heading for 'output'
+	def safe_move_north? #checks whether rover will fall off the plateau by moving North
+		@position[1] < @plateau_size[1]
 	end
 
+	def safe_move_south? #checks whether rover will fall off the plateau by moving South
+		@position[1] > 0
+	end
 
-	private
+	def safe_move_east? #checks whether rover will fall off the plateau by moving East
+		@position[0] < @plateau_size[0]
+	end
+
+	def safe_move_west? #checks whether rover will fall off the plateau by moving West
+		@position[0] > 0
+	end
+
+	def turn_right #used to add 1 to numberical heading
+		heading_alphabetical((current_heading_numerical) + 1)
+	end
+
+	def turn_left #used to subtract 1 from numerical heading
+		heading_alphabetical((current_heading_numerical) - 1)
+	end
 
 	def new_heading_from(instruction) #converts 'L' or 'R' turn instructions into a new heading
 		instruction == 'R' ? turn_right : turn_left
