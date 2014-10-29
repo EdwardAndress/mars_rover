@@ -1,4 +1,8 @@
+require_relative './motor.rb'
+
 class Rover #used to explore a rectangular plateau and can be fed a list of commands in a string
+
+	include Motor
 
 	def initialize(heading: heading, starting_position: starting_position, plateau_size: plateau_size)
 		@heading = heading || 'N'					#I would like to assign the defaults to named constants but this causes rovers to 
@@ -123,40 +127,6 @@ class Rover #used to explore a rectangular plateau and can be fed a list of comm
 
 	def safe_move_west? #checks whether rover will fall off the plateau by moving West
 		@position[0] > 0
-	end
-
-	def move_north
-		@position[1] += 1
-	end
-
-	def move_south
-		@position[1] -= 1
-	end
-
-	def move_east
-		@position[0] += 1
-	end
-
-	def move_west
-		@position[0] -= 1
-	end
-
-	def move
-		if 		heading == 'N' && safe_move_north?
-					move_north
-					@positions_log << report
-		elsif 	heading == 'S' && safe_move_south?
-					move_south
-					@positions_log << report
-		elsif 	heading == 'E' && safe_move_east?
-					move_east
-					@positions_log << report 					
-		elsif 	heading == 'W' && safe_move_west?
-					move_west
-					@positions_log << report
-		else
-			@errors << {Time.now => "Invalid move (aborted) at #{@position} heading #{heading}"}
-		end
 	end
 
 	def report
