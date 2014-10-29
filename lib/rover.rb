@@ -48,6 +48,7 @@ class Rover #used to explore a rectangular plateau and can be fed a list of comm
 
 	def receive_plateau_data(size) #takes plateau size as two numbers separated by a space in a string eg . "5 5"
 		@plateau_size = size.split(" ").map {| dimension | dimension.to_i}
+		@total_plateau_area = (@plateau_size[1] + 1) * (@plateau_size[0] + 1)
 	end
 
 	def safe_move_north? #checks whether rover will fall off the plateau by moving North
