@@ -2,9 +2,10 @@ require 'rover'
 
 describe Rover do
 
-let(:rover) 	{Rover.new}					#rover for testing
-let(:e_rover) 	{Rover.new(heading: 'E')} 	#new rover heading East
-let(:s_rover)	{Rover.new(heading: 'S', starting_position: [0, 1])}
+let(:rover) 		{Rover.new}					#rover for testing
+let(:e_rover) 		{Rover.new(heading: 'E')} 	#new rover heading East
+let(:s_rover)		{Rover.new(heading: 'S', starting_position: [0, 1])}
+let(:auto_rover) 	{Rover.new(starting_position: [3, 3])}
 
 context 'when instantiated' do
 
@@ -90,6 +91,21 @@ context 'after moving to a new location' do
 	it 'reports its new location' do
 		rover.move
 		expect(rover.report).to eq "0 1 N"
+	end
+
+end
+
+context 'should have some degree of autonomy' do
+
+	it 'and be able to reset its position to [0, 0] by moving to the southern border, then to the western border' do
+		expect(auto_rover.distance_to_southern_edge).to eq 3
+		auto_rover.move_to_south_western_corner
+		expect(auto_rover.position).to eq [0, 0]
+	end
+
+	it 'and explore an entire plateau on command' do
+		auto_rover.explore
+		expect(auto_rover.positions_log.count).to eq auto_rover.total_plateau_area
 	end
 
 end
