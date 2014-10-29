@@ -21,6 +21,10 @@ context 'when instantiated' do
 		expect(e_rover.heading).to eq 'E'
 	end
 
+end
+
+context 'upon receiving input' do
+
 	it 'can convert its heading into a numerical value for use in interpreting turn commands' do #need to refactor associated methods and may therefore break some tests
 		expect(rover.current_heading_numerical).to eq 0
 		rover.change_heading_to('E')
@@ -30,10 +34,6 @@ context 'when instantiated' do
 	it 'can convert the heading index back into a heading' do #need to refactor associated methods and may therefore break some tests
 		expect(rover.heading_alphabetical(0)).to eq 'N'
 	end
-
-end
-
-context 'upon receiving input' do
 
 	it 'can be given information regarding the plateau size and shape' do
 		rover.accept_plateau_data("5 5")
