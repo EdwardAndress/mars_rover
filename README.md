@@ -1,5 +1,7 @@
 ###Mars Rover: OOD Tech Test
 -----------------------------------------
+
+The rover should accept instructions from mission control as a string composed of 'L' 'R' and 'M', for tur left, turn right and move forward, respectively.
  
 ####Set it up:
 ```sh
