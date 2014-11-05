@@ -7,6 +7,10 @@ let(:e_rover) 		{Rover.new(heading: 'E')} 	#new rover heading East
 let(:s_rover)		{Rover.new(heading: 'S', starting_position: [0, 1])}
 let(:auto_rover) 	{Rover.new(starting_position: [3, 3])}
 
+before(:each) do
+	Rover.send(:public, *Rover.private_instance_methods) #allows private methods to be tested (though maybe not the best way to achieve this!)
+end
+
 context 'when instantiated' do
 
 	it 'has a default starting position' do
@@ -36,8 +40,13 @@ context 'upon receiving input' do
 	end
 
 	it 'can be given information regarding the plateau size and shape' do
-		rover.accept_plateau_data("5 5")
+		rover.receive_plateau_data("5 5")
 		expect(rover.plateau_size).to eq [5, 5]
+	end
+
+	it 'should update the total_plateau_area data when the plateau_size data is changed' do
+		rover.receive_plateau_data("6 6")
+		expect(rover.total_plateau_area).to eq 49
 	end
 
 	it 'can convert input commands into instructions for new headings' do
@@ -79,7 +88,7 @@ context 'upon receiving input' do
 
 	it 'must not move off the edge of the plateau' do
 		edge_rover = Rover.new(starting_position: [5, 5])
-		edge_rover.accept_plateau_data("5 5")
+		edge_rover.receive_plateau_data("5 5")
 		edge_rover.move
 		expect(edge_rover.position).to eq [5, 5]
 	end
