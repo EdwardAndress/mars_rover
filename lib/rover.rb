@@ -29,7 +29,7 @@ class Rover #used to explore a rectangular plateau and can be fed a list of comm
 	
 	def explore
 
-		move_to_south_western_corner
+		move_to_south_western_corner #moving to one corner before starting this makes it easier for the rover to scan the entire plateau
 
 		until positions_log.count == total_plateau_area
 			face_opposite_edge
